@@ -1,0 +1,423 @@
+/* 基本設定 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* 手書き風フォントがあれば指定 */
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* ドット背景の生成 */
+.dot-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#ddd 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
+}
+
+/* 全体コンテナ */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ヘッダー */
+.main-header h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* 2カラムレイアウト */
+.content-wrapper {
+    display: flex;
+    gap: 40px; /* カラム間の隙間 */
+}
+
+.left-column {
+    flex: 1; /* 左側を広めに */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.right-column {
+    flex: 1; /* 右側 */
+}
+
+/* 共通パーツ：ラベル（見出し） */
+.label {
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+/* 共通パーツ：枠線ボックス */
+.memo-box, .purple-box {
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* カレンダー */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    width: 250px; /* ワイヤーフレームのサイズ感 */
+    height: 180px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.calendar-cell {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
+
+/* メモエリア（テキストエリア） */
+.memo-box {
+    height: 200px; /* ワイヤーフレームに合わせた高さ */
+    padding: 15px;
+    border: 2px solid;
+    resize: none; /* サイズ変更不可 */
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: transparent;
+}
+
+/* カラー設定（ラベルとボックス） */
+.green-label { background-color: #6edc6e; color: #fff; }
+.green-box { border-color: #a8eba8; }
+
+.yellow-label { background-color: #ffda4f; color: #333; }
+.yellow-box { border-color: #ffe894; }
+
+.purple-label { background-color: #c087eb; color: #fff; }
+.purple-box { border: 2px solid #e0c3f7; padding: 20px; }
+
+/* 予算シミュレーター内部のスタイル */
+.purple-box h3 {
+    margin-top: 0;
+    color: #6a0dad;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e0c3f7;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#calculate-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #c087eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+#calculate-btn:hover {
+    background-color: #ac62e6;
+}
+
+.result-area {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #e0c3f7;
+    padding-top: 15px;
+}
+
+#total-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6a0dad;
+}
+
+/* レスポンシブ対応（スマホ時） */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+}body {
+    background: linear-gradient(135deg, #ffe9a7 0%, #a7ffd9 100%);
+    font-family: 'Rounded Mplus 1c', 'Arial Rounded MT Bold', Arial, sans-serif;
+    color: #3b2f1e;
+    margin: 0;
+    padding: 0;
+}
+
+.dot-bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        radial-gradient(circle at 20% 20%, #fffbe6 2%, transparent 3%),
+        radial-gradient(circle at 80% 80%, #ffe066 2%, transparent 3%),
+        radial-gradient(circle at 60% 30%, #ffd180 1.5%, transparent 2.5%),
+        radial-gradient(circle at 30% 70%, #a7ffd9 1.5%, transparent 2.5%);
+    background-size: cover;
+}
+
+.main-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    padding: 32px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.main-header h1 {
+    text-align: center;
+    color: #ff8c42;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 2.2em;
+    margin-bottom: 24px;
+    text-shadow: 1px 2px 0 #fffbe6, 0 2px 8px #ffd180;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.left-column, .right-column {
+    flex: 1 1 350px;
+    min-width: 320px;
+}
+
+.schedule-area {
+    background: #fffbe6;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border: 2px dashed #ffe066;
+    box-shadow: 0 2px 8px rgba(255, 204, 51, 0.10);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.calendar-cell {
+    background: #a7ffd9;
+    border-radius: 8px;
+    height: 32px;
+    border: 1.5px solid #ffd180;
+    box-shadow: 0 1px 4px rgba(167,255,217,0.15);
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.date-label {
+    color: #00b894;
+}
+
+.green-label {
+    color: #43a047;
+}
+.yellow-label {
+    color: #ffb300;
+}
+.purple-label {
+    color: #8e44ad;
+}
+
+.memo-area {
+    background: #e0f7fa;
+    border-radius: 18px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border: 2px dashed #80deea;
+    box-shadow: 0 2px 8px rgba(128,222,234,0.10);
+}
+
+.memo-box {
+    width: 100%;
+    min-height: 60px;
+    border-radius: 12px;
+    border: 2px solid #ffd180;
+    background: #fffbe6;
+    font-size: 1em;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.green-box {
+    border-color: #a5d6a7;
+    background: #e8f5e9;
+}
+.yellow-box {
+    border-color: #ffe082;
+    background: #fffde7;
+}
+
+.budget-area {
+    background: #f3e5f5;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border: 2px dashed #ce93d8;
+    box-shadow: 0 2px 8px rgba(206,147,216,0.10);
+}
+
+.budget-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 1px 6px rgba(206,147,216,0.08);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00897b;
+    font-weight: 500;
+}
+
+input[type="number"], input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #ffd180;
+    background: #fffbe6;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+}
+
+button {
+    background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 10px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 204, 51, 0.15);
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ffcc33 0%, #ffb347 100%);
+}
+
+.result-area {
+    background: #fff3e0;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 18px 0;
+    border: 2px dashed #ffd180;
+    color: #ff8c42;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@500&display=swap');.calendar-select {
+    display: flex;
+    gap: 16px;
+    margin: 10px 0 0 0;
+    align-items: center;
+}
+.calendar-select label {
+    font-size: 1em;
+    color: #00b894;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.calendar-select input[type="date"] {
+    border-radius: 8px;
+    border: 2px solid #ffd180;
+    background: #fffbe6;
+    padding: 6px 10px;
+    font-size: 1em;
+}#calendar-container {
+    margin-top: 16px;
+    background: #fffbe6;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 1px 6px rgba(255, 204, 204, 0.10);
+    overflow-x: auto;
+    max-width: 350px;
+}
+.calendar-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+}
+.calendar-table th {
+    color: #ff8c42;
+    font-weight: bold;
+    background: #ffe9a7;
+    border-radius: 8px;
+    padding: 4px 0;
+}
+.calendar-table td {
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 0;
+    transition: background 0.2s;
+}
+.calendar-table td.selected {
+    background: #ffb6c1 !important; /* ピンク色 */
+    color: #fff;
+    font-weight: bold;
+}
+.calendar-table td.today {
+    border: 2px solid #ff8c42;
+}
+.calendar-table td.disabled {
+    color: #ccc;
+    background: #f5f5f5;
+}
